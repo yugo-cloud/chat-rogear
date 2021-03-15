@@ -15,6 +15,7 @@ consumer.subscriptions.create("MessageChannel", {
     console.log('[MessageChannel] received. data=%o', data);
     const messages = document.getElementById('messages');
     const newMessage = document.getElementById('message_text');
+    const image_html = data.content.image ? `<img src="${data.content.image}" class=""message-image" />` : '';
     const html = `
     <div class="message">
       <div class="upper-message">
@@ -28,6 +29,9 @@ consumer.subscriptions.create("MessageChannel", {
       <div class="lower-message">
         <div class="message-content">
           ${ data.content.content }
+        </div>
+        <div class="message-image">
+          ${image_html}
         </div>
       </div>
     </div>

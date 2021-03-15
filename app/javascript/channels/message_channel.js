@@ -15,6 +15,7 @@ consumer.subscriptions.create("MessageChannel", {
     console.log('[MessageChannel] received. data=%o', data);
     const messages = document.getElementById('messages');
     const newMessage = document.getElementById('message_text');
+    const newImage = document.getElementById('message_image');
     const image_html = data.content.image ? `<img src="${data.content.image}" class=""message-image" />` : '';
     const html = `
     <div class="message">
@@ -40,5 +41,6 @@ consumer.subscriptions.create("MessageChannel", {
     var bottom = messages.scrollHeight - messages.clientHeight;
     messages.scroll(0, bottom);
     newMessage.value='';
+    newImage.value='';
   }
 });

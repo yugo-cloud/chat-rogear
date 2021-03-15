@@ -20,7 +20,7 @@
     <%=f.text_field :content, class: "form-message", id: 'message_text', placeholder: "メッセージ入力" %>
     <label class="form-image">
       <span class="image-file">画像</span>
-      <%=f.file_field :image, class: "hidden"%>
+      <%=f.file_field :image, class: "hidden", id: 'message_image'%>
     </label>
     <%=f.submit "送信", class: "form-submit"%>
   </div>

@@ -16,6 +16,7 @@ class MessagesController < ApplicationController
         user_name: @message.user.name,
         created_at: I18n.l(@message.created_at),
         image: @message.image.attached? ? helpers.rails_representation_url(@message.image.variant(resize: '500x500'), only_path: true) : nil,
+        file: @message.file.attached? ? helpers.rails_blob_path(@message.file, only_path: true) : nil,      
       }
       # redirect_to room_messages_path(@room)
     else
@@ -27,6 +28,6 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
+    params.require(:message).permit(:content, :image, :file).merge(user_id: current_user.id)
   end
 end

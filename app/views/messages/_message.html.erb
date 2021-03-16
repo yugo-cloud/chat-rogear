@@ -14,5 +14,6 @@
       <%=message.content%>
     </div>
     <%=image_tag message.image.variant(resize:'500x500'), class: "message-image" if message.image.attached?%>
+    <a><%=link_to "添付ファイル", url_for(message.file) if message.file.attached?%></a>
   </div>
 </div>

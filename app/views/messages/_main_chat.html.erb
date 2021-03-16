@@ -22,6 +22,10 @@
       <span class="image-file">画像</span>
       <%=f.file_field :image, class: "hidden", id: 'message_image'%>
     </label>
+    <label class="form-image">
+      <span class="image-file">ファイル</span>
+      <%=f.file_field :file, class: "hidden", id: 'message_file'%>
+    </label>
     <%=f.submit "送信", class: "form-submit"%>
   </div>
 <% end %>

@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
   def create
     @room = Room.find(params[:room_id])
     @message = @room.messages.new(message_params)
-    if @message.save
+    if @message.save!
       helpers = Rails.application.routes.url_helpers
       ActionCable.server.broadcast "message_channel", content: {
         id: @message.id,
@@ -18,11 +18,16 @@ class MessagesController < ApplicationController
         image: @message.image.attached? ? helpers.rails_representation_url(@message.image.variant(resize: '500x500'), only_path: true) : nil,
         file: @message.file.attached? ? helpers.rails_blob_path(@message.file, only_path: true) : nil,      
       }
-      # redirect_to room_messages_path(@room)
+      # redirect_to room_messages_path(@room) ←元の記述
     else
       @messages = @room.messages.includes(:user)
       render :index
     end
+    # 成功時の表示処理
+    rescue => e
+    logger.error(e)
+    logger.error(e.record.errors.full_messages)
+    # エラー時の表示処理
   end
 
   private

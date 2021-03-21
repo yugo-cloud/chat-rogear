@@ -14,6 +14,13 @@
       <%=message.content%>
     </div>
     <%=image_tag message.image.variant(resize:'500x500'), class: "message-image" if message.image.attached?%>
-    <a><%=link_to "添付ファイル", url_for(message.file) if message.file.attached?%></a>
+    <%=link_to "添付ファイル", url_for(message.file), class: "message-file" if message.file.attached?%>
   </div>
 </div>
+
+
+
+<%# このファイルは実際に送信するメッセージのファイル %>
+<%# 4行目がユーザーネーム、8行目が日付、14がメッセージ、16行目が画像、17行目がその他ファイル %>
+<%#16行目 variantメソッド…ファイルの表示サイズを指定できる。Active Storageを導入している場合に使用可能なメソッド。指定された横幅と高さを超えるサイズにはならない。 %>
+<%# 17行目 候補 url_for(message.file) %>
